@@ -25,7 +25,7 @@ def urls_list():
             url_input = request.form.get('url')
             normalized = normalize_url(url_input)
             if not validators.url(normalized) or len(normalized) > 255:
-                flash('Incorrect URL', 'danger')
+                flash('Некорректный URL', 'danger')
                 return render_template('index.html'), 422
             conn = get_db_connection()
             try:
