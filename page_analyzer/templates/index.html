@@ -4,7 +4,7 @@
 <div class="col-12 col-md-8 offset-md-2">
     <h2 class="mb-4">Добавить сайт</h2>
     
-    <form action="{{ url_for('index') }}" method="post" novalidate>
+    <form action="{{ url_for('urls_list') }}" method="post" novalidate>
         <!-- Атрибут name="url" обязателен по заданию -->
         <div class="input-group mb-3">
             <input type="text" name="url" class="form-control {% if error %}is-invalid{% endif %}" placeholder="https://example.com" required>
