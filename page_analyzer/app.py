@@ -19,7 +19,7 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', '09ca872aa6a312027870de98ba97
 def index():
     return render_template('index.html')
 
-@app.route('/urls')
+@app.route('/urls', methods=['GET', 'POST'])
 def urls_list():
         if request.method == 'POST':
             url_input = request.form.get('url')
