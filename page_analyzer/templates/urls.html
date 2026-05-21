@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Сайты</h2>
+
+<!-- Атрибут data-test="urls" обязателен по заданию -->
+<table class="table table-bordered table-hover" data-test="urls">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Дата создания</th>
+            <th>Последняя проверка</th> <!-- тут новый заголовок -->
+            <th>Код ответа</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for url in urls %}
+        <tr>
+            <td>{{ url.id }}</td>
+            <td>{{ url.name }}</td>
+            <td>{{ url.created_at.strftime('%Y-%m-%d') }}</td>
+            <td>
+                {% if url.last_check_date %}
+                    {{ url.last_check_date.strftime('%Y-%m-%d') }}
+                {% else %}
+                    <!-- Если проверок не было, выводим пусто -->
+                {% endif %}
+            </td>
+            <td>{{ url.last_status_code if url.last_status_code is not none else '' }}
+            </td>
+            <td>
+                <a href="{{ url_for('url_show', url_id=url.id) }}" class="btn btn-sm btn-primary">Подробнее</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

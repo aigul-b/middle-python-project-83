@@ -1,0 +1,37 @@
+[project]
+name = "hexlet-code"
+version = "0.1.0"
+description = "This folder contains homework project called Page_Analyzer"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "flask",
+    "gunicorn",
+    "jinja2",
+    "python-dotenv",
+    "pylint",
+    "psycopg2",
+    "validators",
+    "requests",
+    "beautifulsoup4"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+# pyproject.toml
+[tool.pylint.format]
+max-line-length = 100
+
+[tool.pylint."messages control"]
+disable = [
+    "missing-module-docstring",      # C0114
+    "missing-function-docstring",    # C0116
+    "missing-class-docstring",       # C0115
+    "missing-final-newline",         # C0304
+]
+
+
+[tool.pylint.basic]
+good-names = ["id", "db", "e", "_", "DATABASE_URL"] 

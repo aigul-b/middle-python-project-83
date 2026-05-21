@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-12 col-md-8 offset-md-2">
+    <h2 class="mb-4">Добавить сайт</h2>
+    
+    <form action="{{ url_for('index') }}" method="post" novalidate>
+        <!-- Атрибут name="url" обязателен по заданию -->
+        <div class="input-group mb-3">
+            <input type="text" name="url" class="form-control {% if error %}is-invalid{% endif %}" placeholder="https://example.com" required>
+            <button type="submit" class="btn btn-primary">Проверить</button>
+            
+            <div class="invalid-feedback">
+                {% if error %}{{ error }}{% endif %}
+            </div>
+        </div>
+    </form>
+    
+    <p class="text-muted">Пример: https://www.google.com</p>
+</div>
+{% endblock %}
