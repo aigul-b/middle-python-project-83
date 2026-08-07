@@ -18,8 +18,8 @@ jobs:
         run: |
           sudo systemctl start postgresql.service
           pg_isready
-          sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'test_password';
-          "sudo -u postgres psql -c "CREATE DATABASE test_db;"
+          sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'test_password';"
+          sudo -u postgres psql -c "CREATE DATABASE test_db;"
 
       - name: Install uv
         uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990
