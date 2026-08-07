@@ -1,0 +1,49 @@
+name: SonarCloud
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          fetch-depth: 0
+      
+      - name: Start PostgreSQL
+        run: |
+          sudo systemctl start postgresql.service
+          pg_isready
+          sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'test_password';
+          "sudo -u postgres psql -c "CREATE DATABASE test_db;"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: uv sync --all-groups
+      
+      - name: Load schema
+        run: PGPASSWORD=test_password psql -h localhost -U postgres -d test_db -f database.sql
+
+      - name: Run tests with coverage
+        env:
+          SECRET_KEY: test-secret-key-for-ci
+          DEBUG: "True"
+          DATABASE_URL: postgresql://postgres:test_password@localhost:5432/test_db
+        run: make test-coverage
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@713881670b6b3676cda39549040e2d88c70d582e # v8.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

@@ -35,3 +35,8 @@ disable = [
 
 [tool.pylint.basic]
 good-names = ["id", "db", "e", "_", "DATABASE_URL"] 
+
+[tool.uv.workspace]
+members = [
+    "hexlet-code",
+]
