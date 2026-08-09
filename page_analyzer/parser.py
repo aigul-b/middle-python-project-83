@@ -17,7 +17,10 @@ def parse_page(html):
     else:
         title = ''
 
-    description = desc_tag.get('content', '') if desc_tag else ''
+    if desc_tag:
+        description = desc_tag.get('content', '')
+    else:
+        description = ''
 
     return {
         'h1': h1,
