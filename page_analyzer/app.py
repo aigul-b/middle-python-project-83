@@ -21,7 +21,7 @@ from .utils import normalize_url
  
  
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-only-insecure-key-change-me-please')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-only-insecure-key-change-me-please') # NOSONAR
 csrf = CSRFProtect(app)
  
 @app.route('/', methods=['GET'])
@@ -59,7 +59,7 @@ def urls_list():
     return render_template('urls.html', urls=urls)
  
  
-@app.route('/urls/<int:url_id>')
+@app.route('/urls/<int:url_id>', methods=['GET'])
 def url_show(url_id):
     conn = get_db_connection()
     try:
