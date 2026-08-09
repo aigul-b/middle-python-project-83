@@ -40,3 +40,9 @@ good-names = ["id", "db", "e", "_", "DATABASE_URL"]
 members = [
     "hexlet-code",
 ]
+
+[dependency-groups]
+dev = [
+    "coverage>=7.15.4",
+    "pytest>=9.1.1",
+]
