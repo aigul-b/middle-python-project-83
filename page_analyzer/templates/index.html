@@ -5,6 +5,7 @@
     <h2 class="mb-4">Добавить сайт</h2>
     
     <form action="{{ url_for('urls_list') }}" method="post" novalidate>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <!-- Атрибут name="url" обязателен по заданию -->
         <div class="input-group mb-3">
             <input type="text" name="url" class="form-control {% if error %}is-invalid{% endif %}" placeholder="https://example.com" required>

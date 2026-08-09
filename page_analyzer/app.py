@@ -5,6 +5,7 @@ import validators
 import requests
 import psycopg2
 from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_wtf.csrf import CSRFProtect
  
 from .db import (
     get_db_connection,
@@ -20,9 +21,8 @@ from .utils import normalize_url
  
  
 app = Flask(__name__)
- 
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', '09ca872aa6a312027870de98ba97c813')
- 
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-only-insecure-key-change-me-please')
+csrf = CSRFProtect(app)
  
 @app.route('/', methods=['GET'])
 def index():
@@ -109,5 +109,5 @@ def url_check(url_id):
  
  
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=os.getenv('DEBUG', 'False') == 'True')
  
