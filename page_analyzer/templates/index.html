@@ -6,7 +6,7 @@
     
     <form action="{{ url_for('urls_list') }}" method="post" novalidate>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <!-- Атрибут name="url" обязателен по заданию --> <!-- NOSONAR -->
+        <label for="url-input" class="visually-hidden">URL сайта</label>
         <div class="input-group mb-3">
             <input type="text" id="url-input" name="url" class="form-control {% if error %}is-invalid{% endif %}" placeholder="https://example.com" required>
             <button type="submit" class="btn btn-primary">Проверить</button>

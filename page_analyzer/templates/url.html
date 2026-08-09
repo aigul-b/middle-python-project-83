@@ -43,7 +43,6 @@
     {% for check in checks %}
     <tr>
       <td>{{ check.id }}</td>
-      <!-- <td>{{ check.status_code or '' }}</td>--> <!-- NOSONAR -->
       <td>{{ check.status_code if check.status_code is not none else '' }}</td>
       <td>{{ check.h1|truncate(200, True, '...') if check.h1 else '' }}</td>
       <td>{{ check.title|truncate(200, True, '...') if check.title else '' }}</td>
